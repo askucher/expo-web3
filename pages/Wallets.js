@@ -173,12 +173,13 @@ export default ({ store, web3t }) => {
     <View style={styles.container}>
 
       <Background fullscreen={true}>
-        <View style={[styles.topView, {backgroundColor: "transparent", height: "20%", marginTop: hp("5%"), marginHorizontal: "17%", width: "66%", zIndex: 999}]}>
+        
+        {/* <View style={[styles.topView, {backgroundColor: "transparent", height: "20%", marginTop: hp("5%"), marginHorizontal: "17%", width: "66%", zIndex: 999}]}>
         {CustomRefreshControl({swipeRefresh: refreshBalance, store, children: <>
         </>
           })}
-        </View>
-        <View style={styles.topView}>
+        </View> */}
+        {/* <View style={styles.topView}>
           
             <Header transparent style={styles.mtIphoneX}>
               <Left style={styles.viewFlexHeader}/>
@@ -231,7 +232,59 @@ export default ({ store, web3t }) => {
               }
             >{wallets(store, web3t)}</ScrollView>
           </LinearGradient>
+        </View> */}
+        <ScrollView style={{  }}>
+
+
+
+          <View style={{ }}>
+          {/* <View style={{ flex: 1, height: "25%", width: "100%"}}/> */}
+            <View style={{ height: hp("25%")}}/>
+          <LinearGradient
+            colors={[Images.color1, Images.color1, Images.color2]}
+            style={{ height: "100%", width: "100%"}}
+          >
+              {wallets(store, web3t)}
+          </LinearGradient>
+          </View>
+        </ScrollView>
+
+
+        <View style={{ position: "absolute", height: hp("25%"), width: "100%", zIndex: 111}}>
+          <Header transparent style={styles.mtIphoneX}>
+                <Left style={styles.viewFlexHeader}/>
+                <Body style={styles.viewFlexHeader}>
+                  <Text style={styles.title1}>{lang.yourWallets}</Text>
+                </Body>
+                <Right style={styles.viewFlexHeader}>
+                  <Button
+                    transparent
+                    style={styles.arrowHeaderLeft}
+                    onPress={changePage("add")}
+                  >
+                    <Icon name="md-create" style={styles.refreshHeaderIcon} />
+                  </Button>
+                </Right>
+              </Header>
+              <StatusBar
+                barStyle="light-content"
+                translucent={true}
+                backgroundColor={"transparent"}
+              />
+              
+              
+            <View style={styles.viewWalletAbsolute}>
+              <Text style={styles.titleAbsolute}>{lang.totalBalance}</Text>
+              <Text style={styles.textBalanceAbsolute}>
+                {calcUsd} <Text style={styles.textCurrency}>$</Text>
+              </Text>
+            </View>
         </View>
+
+
+
+
+
 
       </Background>
       <Footer store={store}></Footer>

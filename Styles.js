@@ -823,7 +823,7 @@ export default StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     left: 20,
-    bottom: 10,
+    top: -40,
   },
   titleBlack: {
     ...ifIphoneX(
@@ -1310,12 +1310,12 @@ export default StyleSheet.create({
     paddingTop: 20,
   },
   userHistoryRow: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'flex-start',
     width: "100%"
   },
   userHistoryRow1: {
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'flex-start',
     width: "90%"
   },
@@ -4632,10 +4632,10 @@ export default StyleSheet.create({
     }),
   },
   styleLogoCamera: {
-    
+
         height: 86/1.5,
         width: 115/1.5,
-    
+
   },
   setupConfirmImg: {
     height: 292 / 5,
@@ -5230,7 +5230,7 @@ export default StyleSheet.create({
         }),
       }
     ),
-    
+
   },
   square: {
     top: 30,
@@ -5399,12 +5399,12 @@ export default StyleSheet.create({
   scrollViewAndroid: {
     width: Platform.OS === "android" ? "90%" : null
   },
-  
+
   containerBarCode: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between'
-    
+
   },
   layerTop: {
     flex: 0.5,
@@ -5485,7 +5485,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: "pink"
   },
-  
+
   bottomLayer: {
     flex: 3,
     backgroundColor: "transparent"
@@ -5496,7 +5496,7 @@ export default StyleSheet.create({
     backgroundColor: "red",
   },
   styleVersion: {
-    opacity: 0.50, 
+    opacity: 0.50,
     marginTop: 5
   }
 

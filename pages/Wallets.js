@@ -36,6 +36,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
+let updateScroll = null;
 
 const wallets = (store, web3t) => {
   const changePage = (tab) => () => {
@@ -164,23 +165,25 @@ export default ({ store, web3t }) => {
     });
     return true;
   };
-  
-  
+  const onscroll = ({nativeEvent}) => {
+    updateScroll && updateScroll(nativeEvent.contentOffset.y);
+  };
 
+// console.log(store.current.walletsScrollPos);
 
 
   return (
     <View style={styles.container}>
 
       <Background fullscreen={true}>
-        
+
         {/* <View style={[styles.topView, {backgroundColor: "transparent", height: "20%", marginTop: hp("5%"), marginHorizontal: "17%", width: "66%", zIndex: 999}]}>
         {CustomRefreshControl({swipeRefresh: refreshBalance, store, children: <>
         </>
           })}
         </View> */}
         {/* <View style={styles.topView}>
-          
+
             <Header transparent style={styles.mtIphoneX}>
               <Left style={styles.viewFlexHeader}/>
               <Body style={styles.viewFlexHeader}>
@@ -201,19 +204,19 @@ export default ({ store, web3t }) => {
               translucent={true}
               backgroundColor={"transparent"}
             />
-            
-            
+
+
           <View style={styles.viewWalletAbsolute}>
             <Text style={styles.titleAbsolute}>{lang.totalBalance}</Text>
             <Text style={styles.textBalanceAbsolute}>
               {calcUsd} <Text style={styles.textCurrency}>$</Text>
             </Text>
           </View>
-          
+
         </View>
 
         <View style={styles.viewMonoWallets}>
-          
+
           <LinearGradient
             colors={[Images.color1, Images.color1, Images.color2]}
             style={styles.linearGradientBg}
@@ -233,7 +236,7 @@ export default ({ store, web3t }) => {
             >{wallets(store, web3t)}</ScrollView>
           </LinearGradient>
         </View> */}
-        <ScrollView style={{  }}>
+        <ScrollView style={{  }} onScroll={onscroll}>
 
 
 
@@ -250,36 +253,8 @@ export default ({ store, web3t }) => {
         </ScrollView>
 
 
-        <View style={{ position: "absolute", height: hp("25%"), width: "100%", zIndex: 111}}>
-          <Header transparent style={styles.mtIphoneX}>
-                <Left style={styles.viewFlexHeader}/>
-                <Body style={styles.viewFlexHeader}>
-                  <Text style={styles.title1}>{lang.yourWallets}</Text>
-                </Body>
-                <Right style={styles.viewFlexHeader}>
-                  <Button
-                    transparent
-                    style={styles.arrowHeaderLeft}
-                    onPress={changePage("add")}
-                  >
-                    <Icon name="md-create" style={styles.refreshHeaderIcon} />
-                  </Button>
-                </Right>
-              </Header>
-              <StatusBar
-                barStyle="light-content"
-                translucent={true}
-                backgroundColor={"transparent"}
-              />
-              
-              
-            <View style={styles.viewWalletAbsolute}>
-              <Text style={styles.titleAbsolute}>{lang.totalBalance}</Text>
-              <Text style={styles.textBalanceAbsolute}>
-                {calcUsd} <Text style={styles.textCurrency}>$</Text>
-              </Text>
-            </View>
-        </View>
+
+        <TopHeader lang={lang} calcUsd={calcUsd} changePage={changePage}/>
 
 
 
@@ -291,3 +266,63 @@ export default ({ store, web3t }) => {
     </View>
   );
 };
+
+
+class TopHeader extends React.Component {
+  constructor(props) {
+    super(props);
+    updateScroll = (walletsScrollPos) => {
+      this.setState({walletsScrollPos});
+    };
+  }
+  state = {
+    walletsScrollPos: 0
+  }
+  componentWillUnmount() {
+    updateScroll = null;
+  }
+  render() {
+    let opacity = 1-Math.min(1, Math.max(0, this.state.walletsScrollPos-40)/30);
+
+    return (
+      <View style={{ position: "absolute", height: hp("25%"), width: "100%"}}>
+        <Header transparent style={[styles.mtIphoneX, {
+          transform: [{scale: 1-Math.min(1, Math.max(0, this.state.walletsScrollPos-40)/50)}],
+        }]} opacity={opacity}>
+          <Left style={styles.viewFlexHeader}/>
+          <Body style={styles.viewFlexHeader}>
+            <Text style={styles.title1}>{this.props.lang.yourWallets}</Text>
+          </Body>
+          <Right style={styles.viewFlexHeader}>
+            <Button
+              transparent
+              style={styles.arrowHeaderLeft}
+              onPress={this.props.changePage("add")}
+            >
+              <Icon name="md-create" style={styles.refreshHeaderIcon} />
+            </Button>
+          </Right>
+        </Header>
+        <StatusBar
+          barStyle="light-content"
+          translucent={true}
+          backgroundColor={"transparent"}
+        />
+        <View style={styles.viewWalletAbsolute}>
+          <Text style={[styles.titleAbsolute, {
+            top: 0-Math.min(36, this.state.walletsScrollPos),
+          }]}>{this.props.lang.totalBalance}</Text>
+          <Text style={[styles.textBalanceAbsolute, {
+            top: 24-Math.min(60, this.state.walletsScrollPos),
+            left: 20+2.5*Math.min(35, this.state.walletsScrollPos),
+            fontSize: 36 - Math.min(16, Math.max(0, this.state.walletsScrollPos-30))
+          }]}>
+            {this.props.calcUsd} <Text style={[styles.textCurrency, {
+              fontSize: 24 - Math.min(16, Math.max(0, this.state.walletsScrollPos-30))/2
+            }]}>$</Text>
+          </Text>
+        </View>
+      </View>
+    );
+  }
+}

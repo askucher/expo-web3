@@ -166,7 +166,7 @@ export default ({ store, web3t }) => {
     return true;
   };
   const onscroll = ({nativeEvent}) => {
-    updateScroll && updateScroll(Math.max(0, nativeEvent.contentOffset.y));
+    updateScroll && updateScroll(nativeEvent.contentOffset.y);
   };
 
 // console.log(store.current.walletsScrollPos);
@@ -282,18 +282,18 @@ class TopHeader extends React.Component {
     updateScroll = null;
   }
   render() {
-    let opacity = 1-Math.min(1, Math.max(0, this.state.walletsScrollPos-40)/30);
-
+    const {walletsScrollPos} = this.state;
+    let opacity = 1-Math.min(1, Math.max(0, walletsScrollPos-40)/30);
     return (
-      <View style={{ position: "absolute", height: hp("25%"), width: "100%"}}>
+      <View style={{ position: "absolute", height: hp("25%"), width: "100%", top: -Math.min(0, walletsScrollPos)}} pointerEvents='box-none'>
         <Header transparent style={[styles.mtIphoneX, {
-          transform: [{scale: 1-Math.min(1, Math.max(0, this.state.walletsScrollPos-40)/50)}],
-        }]} opacity={opacity}>
-          <Left style={styles.viewFlexHeader}/>
-          <Body style={styles.viewFlexHeader}>
+          transform: [{scale: 1-Math.min(1, Math.max(0, walletsScrollPos-40)/50)}],
+        }]} opacity={opacity} pointerEvents='box-none'>
+          <Left style={styles.viewFlexHeader} pointerEvents='none'/>
+          <Body style={styles.viewFlexHeader} pointerEvents='none'>
             <Text style={styles.title1}>{this.props.lang.yourWallets}</Text>
           </Body>
-          <Right style={styles.viewFlexHeader}>
+          <Right style={styles.viewFlexHeader} pointerEvents='box-none'>
             <Button
               transparent
               style={styles.arrowHeaderLeft}
@@ -307,18 +307,19 @@ class TopHeader extends React.Component {
           barStyle="light-content"
           translucent={true}
           backgroundColor={"transparent"}
+          pointerEvents='none'
         />
-        <View style={styles.viewWalletAbsolute}>
+        <View style={styles.viewWalletAbsolute} pointerEvents='none'>
           <Text style={[styles.titleAbsolute, {
-            top: 0-Math.min(36, this.state.walletsScrollPos),
+            top: 0-Math.min(36, Math.max(0, walletsScrollPos)),
           }]}>{this.props.lang.totalBalance}</Text>
           <Text style={[styles.textBalanceAbsolute, {
-            top: 24-Math.min(60, this.state.walletsScrollPos),
-            left: 20+2.5*Math.min(35, this.state.walletsScrollPos),
-            fontSize: 36 - Math.min(16, Math.max(0, this.state.walletsScrollPos-30))
+            top: 24-Math.min(60, Math.max(0, walletsScrollPos)),
+            left: 20+2.5*Math.min(35, Math.max(0, walletsScrollPos)),
+            fontSize: 36 - Math.min(16, Math.max(0, walletsScrollPos-30))
           }]}>
             {this.props.calcUsd} <Text style={[styles.textCurrency, {
-              fontSize: 24 - Math.min(16, Math.max(0, this.state.walletsScrollPos-30))/2
+              fontSize: 24 - Math.min(16, Math.max(0, walletsScrollPos-30))/2
             }]}>$</Text>
           </Text>
         </View>

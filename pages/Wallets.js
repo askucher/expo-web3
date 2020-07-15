@@ -166,7 +166,7 @@ export default ({ store, web3t }) => {
     return true;
   };
   const onscroll = ({nativeEvent}) => {
-    updateScroll && updateScroll(nativeEvent.contentOffset.y);
+    updateScroll && updateScroll(Math.max(0, nativeEvent.contentOffset.y));
   };
 
 // console.log(store.current.walletsScrollPos);
@@ -236,7 +236,7 @@ export default ({ store, web3t }) => {
             >{wallets(store, web3t)}</ScrollView>
           </LinearGradient>
         </View> */}
-        <ScrollView style={{  }} onScroll={onscroll}>
+        <ScrollView style={{  }} onScroll={onscroll} scrollEventThrottle={1}>
 
 
 

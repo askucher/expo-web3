@@ -34,7 +34,7 @@ import {
 } from "react-native";
 
 const showToast = (message) => {
-  console.log(message);
+  // console.log(message);
   this.toastify.show(message, 3000);
 };
 

@@ -34,6 +34,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import ContentLoader from "../components/ContentLoader.js"
+
 
 
 const wallets = (store, web3t) => {
@@ -115,7 +117,8 @@ const wallets = (store, web3t) => {
         // { cancelable: false }
       );
     }
-
+    
+    
     return (
       <ListItem
         key={wallet.coin.token}
@@ -134,6 +137,7 @@ const wallets = (store, web3t) => {
             <Text style={{ color: "#fff" }}>{balance}</Text>
             <Text note> ({parseFloat(balanceUsd).toFixed(2)} USD)</Text>
           </Text>
+          {/* <ContentLoader height={50} style={styles.contentLoaderNull}/> */}
         </Body>
         <Right>
           <Button transparent onPress={chooseWallet}>
@@ -143,6 +147,7 @@ const wallets = (store, web3t) => {
       </ListItem>
     );
   };
+  
   return (
     <Content>
       <List>{wallets.map(listItem)}</List>
@@ -168,10 +173,6 @@ export default ({ store, web3t }) => {
     });
     return true;
   };
-
-
-
-
 
   return (
     <View style={styles.container}>
@@ -211,7 +212,10 @@ export default ({ store, web3t }) => {
             <Text style={styles.textBalanceAbsolute}>
               {calcUsd} <Text style={styles.textCurrency}>$</Text>
             </Text>
+            {/* <ContentLoader/> */}
+
           </View>
+
 
         </View>
 

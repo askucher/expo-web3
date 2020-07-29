@@ -5555,14 +5555,7 @@ export default StyleSheet.create({
 
   },
   contentLoader: {
-    marginLeft: 20, 
-    marginTop: -20, 
-    opacity: 0.7
+    opacity: 0.4
   },
-  contentLoaderNull: {
-    marginLeft: 0, 
-    marginTop: 0,
-    opacity: 0.7
-  }
-
+  
 });

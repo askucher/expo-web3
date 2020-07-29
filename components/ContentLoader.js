@@ -6,21 +6,23 @@ import {
     heightPercentageToDP as hp,
   } from "react-native-responsive-screen";
 
+const defaultViewBox = '0 -5 360 130';
+const heightViewBox = hp("10%");
 
 const MyLoader = (props) => (
     <ContentLoader
+        {...props }
         speed={1}
         style={props.style || styles.contentLoader}
         backgroundColor="#262681"
         foregroundColor="#16135C"
-        preserveAspectRatio="none"
-        viewBox="0 0 100 100" 
-        width={wp('50%')} 
-        height={props.height || hp("10%")}
-        {...props }
+        viewBox={props.viewBox || defaultViewBox}
+        width={200} 
+        height={props.height || heightViewBox}
     >
-    <Rect x="0" y="30" width="600" height="150" />
+    <Rect x="0" y="0" width="90%" height="90" rx="20" ry="20"/>
   </ContentLoader>
+    
 
 )
 

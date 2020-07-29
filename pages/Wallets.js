@@ -137,7 +137,10 @@ const wallets = (store, web3t) => {
             <Text style={{ color: "#fff" }}>{balance}</Text>
             <Text note> ({parseFloat(balanceUsd).toFixed(2)} USD)</Text>
           </Text>
-          {/* <ContentLoader height={50} style={styles.contentLoaderNull}/> */}
+          {/* <Text>
+            <ContentLoader height={30} viewBox={"80 -5 300 100"}/>
+          </Text> */}
+
         </Body>
         <Right>
           <Button transparent onPress={chooseWallet}>
@@ -212,7 +215,7 @@ export default ({ store, web3t }) => {
             <Text style={styles.textBalanceAbsolute}>
               {calcUsd} <Text style={styles.textCurrency}>$</Text>
             </Text>
-            {/* <ContentLoader/> */}
+            {/* <Text style={styles.textBalanceAbsolute}><ContentLoader/></Text> */}
 
           </View>
 

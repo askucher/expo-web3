@@ -21,7 +21,7 @@ export default class Fingerprint extends React.Component {
 
   state = {
     authenticated: false,
-    modalVisible: Platform.OS === "android",
+    modalVisible: false,
     failedCount: 0,
     error: null
   };
@@ -113,7 +113,9 @@ export default class Fingerprint extends React.Component {
                     width="100%"
                     radius={5}
                     onPressAction={async () => {
-                      LocalAuthentication.cancelAuthenticate();
+                      try {
+                        LocalAuthentication.cancelAuthenticate().catch(()=>{});
+                      }catch(e){}
                       this.props.onCancel && this.props.onCancel();
                       this.setModalVisible(!this.state.modalVisible);
                     }}

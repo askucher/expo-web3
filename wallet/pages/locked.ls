@@ -1,7 +1,7 @@
 require! {
     \react
     \prelude-ls : { map }
-    \../pin.ls : { set, check, exists, del, setbkp } 
+    \../pin.ls : { set, check, exists, del, setbkp }
     \../navigate.ls
     \../get-primary-info.ls
     \../get-lang.ls
@@ -43,7 +43,7 @@ require! {
         &::-webkit-outer-spin-button, &::-webkit-inner-spin-button
             -webkit-appearance: none
         -moz-appearance: textfield
-    >.logo 
+    >.logo
         margin: 4rem 0
         >img
             height: 80px
@@ -204,9 +204,9 @@ check-pin = (store, web3t)->
     if store.current.page-pin?
         store.current.page = store.current.page-pin
         store.current.page-pin = null
-    else
-        navigate store, web3t, \:init
-        notify-form-result \unlock, null
+        return
+    navigate store, web3t, \:init
+    notify-form-result \unlock, null
 version = (store, web3t)->
     .version.pug #{store.version}
 input = (store, web3t)->
@@ -215,6 +215,7 @@ input = (store, web3t)->
         border: "0"
         color: style.app.text
         background: style.app.primary1
+        background-color: style.app.primary1-spare
         width: "130px"
         height: "36px"
         margin-top: "10px"
@@ -310,6 +311,7 @@ setup-button = (store, web3t)->
         border: "1px solid #{style.app.primary3}"
         color: style.app.text2
         background: style.app.primary3
+        background-color: style.app.primary3-spare
     btn-icon =
         filter: style.app.btn-icon
     .pug(key="setup-button")
@@ -329,6 +331,7 @@ create-wallet = (store, web3t)->
         border: "1px solid #{style.app.primary2}"
         color: style.app.text
         background: style.app.primary2
+        background-color: style.app.primary2-spare
     .pug(key="create-wallet")
         button.setup.pug(on-click=create style=button-primary2-style)
             span.pug

@@ -14619,6 +14619,11 @@ prop-types@15.7.2, prop-types@>=15.4.0, prop-types@^15.5.10, prop-types@^15.5.4,
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
+protect@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/protect/-/protect-0.5.0.tgz#f5e9b07a6d906c30f5b3bd4aeb8674c3c8982785"
+  integrity sha512-3omo68gbgDziZ1+rRaED7bjFKQ3QvyR4hSULc2s1FDgSDpk9b5EkX+h6qhtkI10b3dxqCUw4YYc/huW/mZXQSQ==
+
 proxy-addr@~2.0.5:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.6.tgz#fdc2336505447d3f2f2c638ed272caf614bbb2bf"

@@ -48,6 +48,7 @@
     "pincode": "1.0.0",
     "prelude-ls": "^1.1.2",
     "prop-types": ">=15.4.0",
+    "protect": "^0.5.0",
     "querystring": "0.2.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",

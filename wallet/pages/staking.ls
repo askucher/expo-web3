@@ -458,7 +458,7 @@ require! {
     >.title
         position: sticky
         z-index: 1
-        background: linear-gradient(100deg, rgb(51, 20, 98) 4%, rgb(21, 6, 60) 100%)
+        background: var(--background)
         box-sizing: border-box
         top: 0
         width: 100%
@@ -885,6 +885,7 @@ staking-content = (store, web3t)->
         border: "0"
         color: style.app.text2
         background: style.app.primary3
+        background-color: style.app.primary3-spare
     button-primary4-style=
         border: "0"
         color: style.app.text
@@ -1036,7 +1037,7 @@ staking-content = (store, web3t)->
                             .pug
                                 .pug.btn
                                     button { store, on-click: hide-script , icon: \close2 }
-                    if pairs.mining.keystore.length > 0 or window?.location?.href?.index-of('dev') > -1
+                    if pairs.mining.keystore.length > 0 or window.location.href.index-of('dev') > -1
                         .pug
                             .pug.tabs
                                 span.tab.pug(on-click=activate-line class="#{active-line}") #{lang.line-by-line}
@@ -1162,7 +1163,7 @@ staking-content = (store, web3t)->
                                     img.label-coin.pug(src="#{icons.vlx-icon}")
                                     span.pug.color #{vlx-token}
                         button { store, on-click: become-validator , type : \secondary , text: \btnApply , icon : \apply }
-            if window?.location?.href?.index-of('emit') > -1
+            if window.location.href.index-of('emit') > -1
                 .pug.section
                     .title.pug
                         h3.pug #{lang.emit-change}
@@ -1184,6 +1185,7 @@ staking = ({ store, web3t })->
         color: info.app.text
         border-bottom: "1px solid #{info.app.border}"
         background: info.app.background
+        background-color: info.app.bgspare
     border-style2 =
         color: info.app.text
         border-bottom: "1px solid #{info.app.border}"

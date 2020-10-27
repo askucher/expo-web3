@@ -241,6 +241,7 @@ module.exports = ({ store, web3t } )->
     style = get-primary-info store
     account-body-style =
         background: style.app.background
+        background-color: style.app.bgspare
         color: style.app.text
     color =
         color: style.app.text
@@ -265,7 +266,7 @@ module.exports = ({ store, web3t } )->
             .pug.settings
                 .pug.section
                     .list.pug
-                        if store.registry.length > 0
+                        if store.registry.length > -1
                             store.registry
                                 |> filter filter-item store
                                 |> map create-item { store, web3t }

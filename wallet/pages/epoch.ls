@@ -21,7 +21,7 @@ require! {
     $real-height: 300px
     $cards-height: 296px
     $pad: 20px
-    $radius: 15px
+    $radius: 15px    
     height: auto
     box-sizing: border-box
     position: relative
@@ -252,6 +252,7 @@ module.exports = (store, web3t)->
         border: "1px solid #{style.app.primary2}"
         color: style.app.text
         background: style.app.primary2
+        background-color: style.app.primary2-spare
         margin: "0"
         width: "100%"
     icon-color=
@@ -320,10 +321,10 @@ module.exports = (store, web3t)->
                             .col.folder-menu.pug
                                 .pug
                                     progress.pug(value="#{store.dashboard.epoch-percent}" max="100")
-                                span.pug
-                                    | #{lang.change}
+                                span.pug 
+                                    | #{lang.change} 
                                     | #{epoch-next}
-                            if window?.location?.href?.index-of('internal') > -1
+                            if window.location.href.index-of('internal') > -1
                                 .col.folder-menu.pug
                                     .pug
                                         button.pug(on-click=monitor style=button-primary2-style)

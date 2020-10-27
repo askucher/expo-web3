@@ -13,40 +13,40 @@ async function makeProxy() {
     inMemoryStorage[key] = value;
   }
   function setItem(key, value) {
-    // console.log('setItem', key, value);
     inMemoryStorage[key] = value;
     AsyncStorage.setItem(key, value);
   }
+  function set(target, key, value) {
+    setItem(key, value);
+  }
   function clear() {
-    // console.log('Clear');
     for (let key in inMemoryStorage) {
       delete inMemoryStorage[key];
     }
     return AsyncStorage.clear();
   }
   function removeItem(key) {
-    // console.log('removeItem', key);
     delete inMemoryStorage[key];
     AsyncStorage.removeItem(key);
   }
-  function getItem(key) {
+  function get(target, key) {
     if (prototype[key]) {
       return prototype[key];
     }
-    // console.log('getItem', key, inMemoryStorage[key]);
+    return getItem(key);
+  }
+  function getItem(key) {
+    debugger;
     return inMemoryStorage[key];
   }
   const prototype = {
-    getItem: (key) => inMemoryStorage[key],
+    getItem,
     setItem,
     clear,
     removeItem
   };
 
-  const proxy = new Proxy(inMemoryStorage, {
-    get: (target, key) => getItem(key),
-    set: (target, key, value) => setItem(key, value)
-  });
+  const proxy = new Proxy(inMemoryStorage, {get,set});
   global.localStorage = proxy;
   return proxy;
 }
